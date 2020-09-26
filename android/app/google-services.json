@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "724865579393",
+    "firebase_url": "https://flutter-mytube-app.firebaseio.com",
+    "project_id": "flutter-mytube-app",
+    "storage_bucket": "flutter-mytube-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:724865579393:android:364b891e0633d4f85ad080",
+        "android_client_info": {
+          "package_name": "com.example.flutter_new_mytube_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "724865579393-b9kvgtht613dellgdfr349f2u1qj9gem.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb9noCIZlVRFoF3jF2m9AFSMamHAecsrA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "724865579393-b9kvgtht613dellgdfr349f2u1qj9gem.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
