@@ -19,14 +19,14 @@ class _AppPolicyState extends State<AppPolicy> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
-              child: Text('Mytubeサービス・アプリ'),
+              child: Text('video keeperサービス・アプリ'),
             ),
             Text(''),
             Center(
               child: Text('利用規約'),
             ),
             Center(
-              child: Text('この規約は、お客様が、が提供する「Mytube」サービス（以下「本サービス」）をご利用頂く際の取扱いにつき定めるものです。本規約に同意した上で本サービスをご利用ください。'),
+              child: Text('この規約は、お客様が、が提供する「video keeper」サービス（以下「本サービス」）をご利用頂く際の取扱いにつき定めるものです。本規約に同意した上で本サービスをご利用ください。'),
             ),
             Text(''),
             Text('第１条（定義）'),

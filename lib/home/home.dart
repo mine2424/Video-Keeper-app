@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
           builder:
               (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
             if (!snapshot.hasData) {
+              print('=== data ===: ${snapshot.data}');
               return Center(
                 child: GFLoader(type: GFLoaderType.circle),
               );

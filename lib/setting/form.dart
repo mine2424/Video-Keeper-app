@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_new_mytube_app/home/home.dart';
+import 'package:flutter_new_mytube_app/tabBarControll/tabBarControll.dart';
 
 class ContactForm extends StatefulWidget {
   @override
@@ -129,7 +130,7 @@ class _FormFinishState extends State<FormFinish> {
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
+            context, MaterialPageRoute(builder: (context) => TabBarControll()));
       });
     });
     super.initState();

@@ -190,7 +190,7 @@ class _YoutubeAlarmState extends State<YoutubeAlarm> {
                                                                         bottom:
                                                                             10),
                                                                 child:
-                                                                    Text("HH"),
+                                                                    Text("時間"),
                                                               ),
                                                               NumberPicker
                                                                   .integer(
@@ -221,7 +221,7 @@ class _YoutubeAlarmState extends State<YoutubeAlarm> {
                                                                         bottom:
                                                                             10),
                                                                 child:
-                                                                    Text("MM"),
+                                                                    Text("分"),
                                                               ),
                                                               NumberPicker
                                                                   .integer(
@@ -251,7 +251,7 @@ class _YoutubeAlarmState extends State<YoutubeAlarm> {
                                                                         bottom:
                                                                             10),
                                                                 child:
-                                                                    Text("SS"),
+                                                                    Text("秒"),
                                                               ),
                                                               NumberPicker
                                                                   .integer(
