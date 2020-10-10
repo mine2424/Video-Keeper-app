@@ -47,7 +47,7 @@ class _SettingState extends State<Setting> {
                 ),
                 SizedBox(height: 40),
                 ClayContainer(
-                  height: MediaQuery.of(context).size.width * 0.2,
+                  height: MediaQuery.of(context).size.width * 0.23,
                   width: MediaQuery.of(context).size.width * 0.65,
                   depth: 12,
                   spread: 12,
@@ -87,7 +87,7 @@ class _SettingState extends State<Setting> {
                 // ),
                 // SizedBox(height: 40),
                 ClayContainer(
-                  height: MediaQuery.of(context).size.width * 0.2,
+                  height: MediaQuery.of(context).size.width * 0.23,
                   width: MediaQuery.of(context).size.width * 0.65,
                   depth: 12,
                   spread: 12,
