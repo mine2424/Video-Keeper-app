@@ -2,6 +2,7 @@ import 'package:clay_containers/widgets/clay_containers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_new_mytube_app/services/youtubeKey.dart';
 import 'package:flutter_new_mytube_app/youtube_top/youtube_details.dart';
 import 'package:youtube_api/youtube_api.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -16,8 +17,6 @@ class YoutubeTopPage extends StatefulWidget {
 }
 
 class _YoutubeTopPageState extends State<YoutubeTopPage> {
-  static String key = "AIzaSyBRHxqWWNV0Zvp5jJjbNl_UyrEFxm75DYk";
-
   bool recordsLoaded = false;
   static int maxResults = 25;
   int count = 0;
@@ -27,7 +26,7 @@ class _YoutubeTopPageState extends State<YoutubeTopPage> {
   static String videosType = "videos";
 
   YoutubeAPI ytApi = new YoutubeAPI(
-    key,
+    API_KEY,
     maxResults: maxResults,
     type: videosType,
   );
