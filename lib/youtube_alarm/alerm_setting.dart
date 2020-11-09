@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_new_mytube_app/tabBarControll/tabBarControll.dart';
+import 'package:flutter_new_mytube_app/youtube_top/youtubeTop.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -16,7 +17,7 @@ class YoutubeAlarm extends StatefulWidget {
 }
 
 class _YoutubeAlarmState extends State<YoutubeAlarm> {
-  String _review, _purpose;
+  String _review, _purpose, _videoCount;
   double _currentSliderValue = 1;
   int hour = 0;
   int min = 0;
@@ -34,6 +35,11 @@ class _YoutubeAlarmState extends State<YoutubeAlarm> {
 
   String timeToDisplay = '';
 
+  final String text = "Flutter";
+
+  List<String> _items = ["A", "B", "C"];
+  String _selectedItem = "A";
+
   FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
   NotificationDetails platformChannelSpecifics;
 
@@ -45,18 +51,13 @@ class _YoutubeAlarmState extends State<YoutubeAlarm> {
     timeForTimer = ((hour * 60 * 60) + (min * 60) + sec);
     Timer.periodic(Duration(seconds: 1), (Timer t) {
       setState(() {
-        // if (hour < 1 && min < 1 && sec < 1) {
-        //   _updateNotification();
-        // }
         if (timeForTimer < 1 || checkTimer == false) {
           _updateNotification();
           t.cancel();
-
           checkTimer = true;
           timeToDisplay = '';
           started = true;
           stopped = true;
-          // Navigator.pushReplacement(context, newRoute);
         } else if (timeForTimer < 60) {
           timeToDisplay = timeForTimer.toString();
           timeForTimer = timeForTimer - 1;
@@ -72,7 +73,6 @@ class _YoutubeAlarmState extends State<YoutubeAlarm> {
           int s = t - (60 * m);
           timeToDisplay =
               h.toString() + '時間' + m.toString() + '分' + s.toString() + '秒';
-
           timeForTimer = timeForTimer - 1;
         }
       });
@@ -112,9 +112,6 @@ class _YoutubeAlarmState extends State<YoutubeAlarm> {
 
   _updateNotification() async {
     debugPrint('Notification : start');
-    //await _flutterLocalNotificationsPlugin.cancelAll();
-
-    // final Time time = Time(hour, min, 0);
     var androidPlatformChannelSpecifics =
         AndroidNotificationDetails('MyTube', 'MyTube', 'Time\'s up');
     var iOSPlatformChannelSpecifics = IOSNotificationDetails();
@@ -124,6 +121,23 @@ class _YoutubeAlarmState extends State<YoutubeAlarm> {
         "設定時間を経過しました、アプリに戻って集計しましょう！", platformChannelSpecifics);
   }
 
+  Widget _clayContainer({Widget childs, double height, double width}) {
+    return Center(
+        child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 30),
+      child: ClayContainer(
+        height: MediaQuery.of(context).size.width * height,
+        width: MediaQuery.of(context).size.width * width,
+        depth: 12,
+        spread: 12,
+        borderRadius: 16,
+        color: Color(0xFFF2F2F2),
+        child: childs,
+      ),
+    ));
+  }
+
+  String dropdownValue = '0';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,260 +152,230 @@ class _YoutubeAlarmState extends State<YoutubeAlarm> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 50),
-                    Center(
-                      child: ClayContainer(
-                        height: MediaQuery.of(context).size.width * 0.4,
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        depth: 12,
-                        spread: 12,
-                        borderRadius: 16,
-                        color: Color(0xFFF2F2F2),
-                        child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 16, right: 16, top: 16),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('見る時間(分)',
-                                      style: TextStyle(
-                                          fontSize: 21,
-                                          letterSpacing: 0.8,
-                                          fontWeight: FontWeight.w800,
-                                          color: fontColor,
-                                          fontFamily: 'Raleway')),
-                                  SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      RaisedButton(
-                                        child: Text('時間設定'),
-                                        onPressed: () {
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return StatefulBuilder(
-                                                  builder: (context, setState) {
-                                                    return AlertDialog(
-                                                      title:
-                                                          Text('時間を設定してください'),
-                                                      content: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Padding(
-                                                                padding: EdgeInsets
-                                                                    .only(
-                                                                        bottom:
-                                                                            10),
-                                                                child:
-                                                                    Text("時間"),
-                                                              ),
-                                                              NumberPicker
-                                                                  .integer(
-                                                                initialValue:
-                                                                    hour,
-                                                                minValue: 0,
-                                                                maxValue: 2,
-                                                                listViewWidth:
-                                                                    60.0,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  setState(() {
-                                                                    hour =
-                                                                        value;
-                                                                  });
-                                                                },
-                                                              )
-                                                            ],
-                                                          ),
-                                                          Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Padding(
-                                                                padding: EdgeInsets
-                                                                    .only(
-                                                                        bottom:
-                                                                            10),
-                                                                child:
-                                                                    Text("分"),
-                                                              ),
-                                                              NumberPicker
-                                                                  .integer(
-                                                                initialValue:
-                                                                    min,
-                                                                minValue: 0,
-                                                                maxValue: 59,
-                                                                listViewWidth:
-                                                                    60.0,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  setState(() {
-                                                                    min = value;
-                                                                  });
-                                                                },
-                                                              )
-                                                            ],
-                                                          ),
-                                                          Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Padding(
-                                                                padding: EdgeInsets
-                                                                    .only(
-                                                                        bottom:
-                                                                            10),
-                                                                child:
-                                                                    Text("秒"),
-                                                              ),
-                                                              NumberPicker
-                                                                  .integer(
-                                                                initialValue:
-                                                                    sec,
-                                                                minValue: 0,
-                                                                maxValue: 59,
-                                                                listViewWidth:
-                                                                    60.0,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  setState(() {
-                                                                    sec = value;
-                                                                  });
-                                                                },
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      actions: [
-                                                        FlatButton(
-                                                          child: Text("OK"),
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  context),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                              });
-                                        },
-                                      ),
-                                      SizedBox(
-                                        width: 20,
-                                      ),
-                                      Text(
-                                        '$hour時間$min分$sec秒',
-                                        style: TextStyle(fontSize: 22),
-                                      ),
-                                    ],
-                                  ),
-                                ])),
-                      ),
-                    ),
-                    SizedBox(height: 30),
-                    Center(
-                      child: ClayContainer(
-                        height: MediaQuery.of(context).size.width * 0.4,
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        depth: 12,
-                        spread: 12,
-                        borderRadius: 16,
-                        color: Color(0xFFF2F2F2),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 16, right: 16, top: 16),
+                    _clayContainer(
+                        width: 0.8,
+                        height: 0.35,
+                        childs: Padding(
+                          padding: const EdgeInsets.all(12),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('目的',
+                              Text('動画何本見る？',
                                   style: TextStyle(
                                       fontSize: 21,
                                       letterSpacing: 0.8,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w600,
                                       color: fontColor,
-                                      fontFamily: 'Raleway')),
-                              TextFormField(
-                                maxLength: 50,
-                                maxLines: 1,
-                                onSaved: (input) => _purpose = input,
+                                      fontFamily: '')),
+                              const SizedBox(
+                                height: 10,
                               ),
+                              Center(
+                                  child: DropdownButton<String>(
+                                value: dropdownValue,
+                                icon: Icon(Icons.arrow_downward),
+                                iconSize: 24,
+                                elevation: 16,
+                                style: TextStyle(color: Colors.deepPurple),
+                                underline: Container(
+                                  height: 2,
+                                  color: Color(0xFF2D89AD),
+                                ),
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    dropdownValue = newValue;
+                                    _videoCount = newValue;
+                                  });
+                                },
+                                onTap: () {},
+                                items: <String>[
+                                  '0',
+                                  '1',
+                                  '2',
+                                  '3',
+                                  '4',
+                                  '5',
+                                  '6',
+                                  '7',
+                                  '8',
+                                  '9',
+                                  '10'
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value,
+                                        style: TextStyle(
+                                            fontSize: 21,
+                                            letterSpacing: 0.8,
+                                            fontWeight: FontWeight.w300,
+                                            color: fontColor,
+                                            fontFamily: '')),
+                                  );
+                                }).toList(),
+                              ))
                             ],
                           ),
-                        ),
-                      ),
-                    ),
-
-                    // 時間設定form
-                    SizedBox(height: 30),
-                    Center(
-                      child: ClayContainer(
-                          height: MediaQuery.of(context).size.width * 0.4,
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          depth: 12,
-                          spread: 12,
-                          borderRadius: 16,
-                          color: Color(0xFFF2F2F2),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 16, right: 16, top: 16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('見終わった後の気持ち',
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        letterSpacing: 0.8,
-                                        fontWeight: FontWeight.w800,
-                                        color: fontColor,
-                                        fontFamily: '')),
-                                Slider(
-                                  value: _currentSliderValue,
-                                  min: 0,
-                                  max: 100,
-                                  divisions: 10,
-                                  label: _currentSliderValue.round().toString(),
-                                  onChanged: (double value) {
-                                    setState(() {
-                                      _currentSliderValue = value;
-                                    });
-                                  },
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text('←bad',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            letterSpacing: 0.8,
-                                            color: fontColor)),
-                                    SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.38),
-                                    Text('happy→',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            letterSpacing: 0.8,
-                                            color: fontColor)),
-                                  ],
-                                )
-                              ],
-                            ),
-                          )),
-                    ),
-                    SizedBox(height: 30),
+                        )),
+                    // Center(
+                    //   child: ClayContainer(
+                    //     height: MediaQuery.of(context).size.width * 0.4,
+                    //     width: MediaQuery.of(context).size.width * 0.8,
+                    //     depth: 12,
+                    //     spread: 12,
+                    //     borderRadius: 16,
+                    //     color: Color(0xFFF2F2F2),
+                    //     child: Padding(
+                    //         padding: const EdgeInsets.only(
+                    //             left: 16, right: 16, top: 16),
+                    //         child: Column(
+                    //             crossAxisAlignment: CrossAxisAlignment.start,
+                    //             mainAxisAlignment: MainAxisAlignment.center,
+                    //             children: [
+                    //               Text('見る時間(分)',
+                    //                   style: TextStyle(
+                    //                       fontSize: 21,
+                    //                       letterSpacing: 0.8,
+                    //                       fontWeight: FontWeight.w800,
+                    //                       color: fontColor,
+                    //                       fontFamily: 'Raleway')),
+                    //               SizedBox(height: 10),
+                    //               Row(
+                    //                 children: [
+                    //                   RaisedButton(
+                    //                     child: Text('時間設定'),
+                    //                     onPressed: () {
+                    //                       showDialog(
+                    //                           context: context,
+                    //                           builder: (BuildContext context) {
+                    //                             return StatefulBuilder(
+                    //                               builder: (context, setState) {
+                    //                                 return AlertDialog(
+                    //                                   title:
+                    //                                       Text('時間を設定してください'),
+                    //                                   content: Row(
+                    //                                     mainAxisAlignment:
+                    //                                         MainAxisAlignment
+                    //                                             .center,
+                    //                                     children: [
+                    //                                       Column(
+                    //                                         mainAxisAlignment:
+                    //                                             MainAxisAlignment
+                    //                                                 .center,
+                    //                                         children: [
+                    //                                           Padding(
+                    //                                             padding: EdgeInsets
+                    //                                                 .only(
+                    //                                                     bottom:
+                    //                                                         10),
+                    //                                             child:
+                    //                                                 Text("時間"),
+                    //                                           ),
+                    //                                           NumberPicker
+                    //                                               .integer(
+                    //                                             initialValue:
+                    //                                                 hour,
+                    //                                             minValue: 0,
+                    //                                             maxValue: 2,
+                    //                                             listViewWidth:
+                    //                                                 60.0,
+                    //                                             onChanged:
+                    //                                                 (value) {
+                    //                                               setState(() {
+                    //                                                 hour =
+                    //                                                     value;
+                    //                                               });
+                    //                                             },
+                    //                                           )
+                    //                                         ],
+                    //                                       ),
+                    //                                       Column(
+                    //                                         mainAxisAlignment:
+                    //                                             MainAxisAlignment
+                    //                                                 .center,
+                    //                                         children: [
+                    //                                           Padding(
+                    //                                             padding: EdgeInsets
+                    //                                                 .only(
+                    //                                                     bottom:
+                    //                                                         10),
+                    //                                             child:
+                    //                                                 Text("分"),
+                    //                                           ),
+                    //                                           NumberPicker
+                    //                                               .integer(
+                    //                                             initialValue:
+                    //                                                 min,
+                    //                                             minValue: 0,
+                    //                                             maxValue: 59,
+                    //                                             listViewWidth:
+                    //                                                 60.0,
+                    //                                             onChanged:
+                    //                                                 (value) {
+                    //                                               setState(() {
+                    //                                                 min = value;
+                    //                                               });
+                    //                                             },
+                    //                                           )
+                    //                                         ],
+                    //                                       ),
+                    //                                       Column(
+                    //                                         mainAxisAlignment:
+                    //                                             MainAxisAlignment
+                    //                                                 .center,
+                    //                                         children: [
+                    //                                           Padding(
+                    //                                             padding: EdgeInsets
+                    //                                                 .only(
+                    //                                                     bottom:
+                    //                                                         10),
+                    //                                             child:
+                    //                                                 Text("秒"),
+                    //                                           ),
+                    //                                           NumberPicker
+                    //                                               .integer(
+                    //                                             initialValue:
+                    //                                                 sec,
+                    //                                             minValue: 0,
+                    //                                             maxValue: 59,
+                    //                                             listViewWidth:
+                    //                                                 60.0,
+                    //                                             onChanged:
+                    //                                                 (value) {
+                    //                                               setState(() {
+                    //                                                 sec = value;
+                    //                                               });
+                    //                                             },
+                    //                                           )
+                    //                                         ],
+                    //                                       ),
+                    //                                     ],
+                    //                                   ),
+                    //                                   actions: [
+                    //                                     FlatButton(
+                    //                                       child: Text("OK"),
+                    //                                       onPressed: () =>
+                    //                                           Navigator.pop(
+                    //                                               context),
+                    //                                     ),
+                    //                                   ],
+                    //                                 );
+                    //                               },
+                    //                             );
+                    //                           });
+                    //                     },
+                    //                   ),
+                    //                   SizedBox(
+                    //                     width: 20,
+                    //                   ),
+                    //                   Text(
+                    //                     '$hour時間$min分$sec秒',
+                    //                     style: TextStyle(fontSize: 22),
+                    //                   ),
+                    //                 ],
+                    //               ),
+                    //             ])),
+                    //   ),
+                    // ),
+                    // SizedBox(height: 30),
                     Center(
                       child: ClayContainer(
                         height: MediaQuery.of(context).size.width * 0.4,
@@ -418,6 +402,7 @@ class _YoutubeAlarmState extends State<YoutubeAlarm> {
                                 maxLength: 50,
                                 maxLines: 1,
                                 onSaved: (input) => _review = input,
+                                onChanged: (value) => _review = value,
                               ),
                             ],
                           ),
@@ -427,87 +412,98 @@ class _YoutubeAlarmState extends State<YoutubeAlarm> {
                     SizedBox(height: 40),
                     //動画スタートボタン
                     Center(
-                      child: SizedBox(
-                        width: 260,
-                        height: 46,
-                        child: RaisedButton(
+                        child: SizedBox(
+                      width: 260,
+                      height: 46,
+                      child: RaisedButton(
                           child: Text("動画スタート！",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 20)),
                           color: Color(0xFF2D89AD),
                           shape: StadiumBorder(),
-                          onPressed: started ? start : null,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Column(
-                        children: [
-                          if (timeForTimer < 10)
-                            Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Text('終了後は集計ボタンを必ず押してください！',
-                                  style: TextStyle(fontSize: 15.6)),
-                            ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          ClayContainer(
-                              height: MediaQuery.of(context).size.width * 0.3,
-                              width: MediaQuery.of(context).size.width * 0.6,
-                              depth: 12,
-                              spread: 12,
-                              borderRadius: 16,
-                              color: Color(0xFFF2F2F2),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Center(
-                                      child: Text(timeToDisplay,
-                                          style: TextStyle(fontSize: 26.5))),
-                                ],
-                              )),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: SizedBox(
-                            width: 160,
-                            height: 46,
-                            child: RaisedButton(
-                              child: Text("キャンセル",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20)),
-                              color: Colors.red,
-                              shape: StadiumBorder(),
-                              onPressed: stopped ? null : stop,
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 30),
-                        Center(
-                          child: SizedBox(
-                            width: 160,
-                            height: 46,
-                            child: RaisedButton(
-                              child: Text("集計",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20)),
-                              color: Colors.black,
-                              shape: StadiumBorder(),
-                              onPressed: sw == 0 ? null : addWatchList,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                          // onPressed: started ? start : null,
+                          onPressed: () {
+                            if (dropdownValue == '' || dropdownValue == '0') {
+                              return null;
+                            } else {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => YoutubeTopPage(
+                                            videoCount: _videoCount,
+                                            message: _review,
+                                          )));
+                            }
+                          }),
+                    )),
+                    // Center(
+                    //   child: Column(
+                    //     children: [
+                    //       if (timeForTimer < 10)
+                    //         Padding(
+                    //           padding: const EdgeInsets.all(5.0),
+                    //           child: Text('終了後は集計ボタンを必ず押してください！',
+                    //               style: TextStyle(fontSize: 15.6)),
+                    //         ),
+                    //       SizedBox(
+                    //         height: 10,
+                    //       ),
+                    //       ClayContainer(
+                    //           height: MediaQuery.of(context).size.width * 0.3,
+                    //           width: MediaQuery.of(context).size.width * 0.6,
+                    //           depth: 12,
+                    //           spread: 12,
+                    //           borderRadius: 16,
+                    //           color: Color(0xFFF2F2F2),
+                    //           child: Column(
+                    //             crossAxisAlignment: CrossAxisAlignment.center,
+                    //             mainAxisAlignment: MainAxisAlignment.center,
+                    //             children: [
+                    //               Center(
+                    //                   child: Text(timeToDisplay,
+                    //                       style: TextStyle(fontSize: 26.5))),
+                    //             ],
+                    //           )),
+                    //     ],
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Center(
+                    //       child: SizedBox(
+                    //         width: 160,
+                    //         height: 46,
+                    //         child: RaisedButton(
+                    //           child: Text("キャンセル",
+                    //               style: TextStyle(
+                    //                   color: Colors.white, fontSize: 20)),
+                    //           color: Colors.red,
+                    //           shape: StadiumBorder(),
+                    //           onPressed: stopped ? null : stop,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     SizedBox(width: 30),
+                    //     Center(
+                    //       child: SizedBox(
+                    //         width: 160,
+                    //         height: 46,
+                    //         child: RaisedButton(
+                    //           child: Text("集計",
+                    //               style: TextStyle(
+                    //                   color: Colors.white, fontSize: 20)),
+                    //           color: Colors.black,
+                    //           shape: StadiumBorder(),
+                    //           onPressed: sw == 0 ? null : addWatchList,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                     SizedBox(
                       height: 50,
                     )
@@ -538,6 +534,7 @@ class _YoutubeAlarmState extends State<YoutubeAlarm> {
           'sumTime': sw,
           'afterFeeling': _currentSliderValue,
           'review': _review,
+          'videoCount': _videoCount,
           'createAt': Timestamp.now()
         });
         Navigator.pushReplacement(

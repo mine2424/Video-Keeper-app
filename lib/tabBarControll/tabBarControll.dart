@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_new_mytube_app/home/home.dart';
 import 'package:flutter_new_mytube_app/setting/setting.dart';
 import 'package:flutter_new_mytube_app/youtube_alarm/alerm_setting.dart';
+import 'package:flutter_new_mytube_app/youtube_top/youtubeTop.dart';
 
 class TabBarControll extends StatefulWidget {
   @override
@@ -35,9 +36,9 @@ class _TabBarControllState extends State<TabBarControll> {
                   indicatorWeight: 2.0,
                   controller: _tabController,
                   tabs: [
-                    Tab(text: 'HOME'),
-                    Tab(text: 'YouTube Alarm'),
-                    Tab(text: 'OTHER'),
+                    Tab(text: 'home'),
+                    Tab(text: 'alarm'),
+                    Tab(text: 'other'),
                   ],
                 ),
               ],

@@ -7,6 +7,7 @@ import 'package:flutter_new_mytube_app/setting/setting.dart';
 import 'package:flutter_new_mytube_app/tabBarControll/tabBarControll.dart';
 import 'package:flutter_new_mytube_app/youtube_alarm/alerm_setting.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_new_mytube_app/youtube_top/youtube_details.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:getwidget/getwidget.dart';
 
@@ -21,8 +22,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
