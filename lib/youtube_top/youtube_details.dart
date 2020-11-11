@@ -66,7 +66,6 @@ class _YoutubeDetailsPageState extends State<YoutubeDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(_videoMetaData.title);
     return YoutubePlayerBuilder(
       onExitFullScreen: () {
         // The player forces portraitUp after exiting fullscreen. This overrides the behaviour.
@@ -112,6 +111,7 @@ class _YoutubeDetailsPageState extends State<YoutubeDetailsPage> {
       builder: (context, player) => Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
+          backgroundColor: Color(0xFF2D89AD),
           title: const Text(
             'video keeper',
             style: TextStyle(color: Colors.white),
@@ -179,14 +179,14 @@ class _YoutubeDetailsPageState extends State<YoutubeDetailsPage> {
       text: TextSpan(
         text: '$title : ',
         style: const TextStyle(
-          color: Colors.red,
+          color: Color(0xFF2D89AD),
           fontWeight: FontWeight.bold,
         ),
         children: [
           TextSpan(
             text: value,
             style: const TextStyle(
-              color: Colors.red,
+              color: Color(0xFF2D89AD),
               fontWeight: FontWeight.w300,
             ),
           ),

@@ -18,9 +18,10 @@ class YoutubeTopPage extends StatefulWidget {
 
 class _YoutubeTopPageState extends State<YoutubeTopPage> {
   bool recordsLoaded = false;
-  static int maxResults = 25;
+  static int maxResults = 45;
   int count = 0;
   List youtubeIdList = [];
+  List videoTitle = [];
 //  static String videosType = "channel";
 // static String videosType = "playlist";
   static String videosType = "videos";
@@ -156,7 +157,8 @@ class _YoutubeTopPageState extends State<YoutubeTopPage> {
                               FlatButton(
                                   onPressed: () {
                                     Navigator.pop(context);
-                                    sendVideoReservation(ytResult[index].url);
+                                    sendVideoReservation(ytResult[index].url,
+                                        ytResult[index].title);
                                   },
                                   child: Text('OK'))
                             ],
@@ -200,8 +202,9 @@ class _YoutubeTopPageState extends State<YoutubeTopPage> {
     ));
   }
 
-  Future<void> sendVideoReservation(id) async {
+  Future<void> sendVideoReservation(id, String title) async {
     youtubeIdList.add(id.toString().substring(32));
+    videoTitle.add(title);
     setState(() {
       count = count + 1;
     });
@@ -214,6 +217,7 @@ class _YoutubeTopPageState extends State<YoutubeTopPage> {
           .doc()
           .set({
         'videoList': youtubeIdList,
+        'videoTitle': videoTitle,
         'createAt': Timestamp.now(),
         'sumTime': youtubeIdList.length,
         'message': widget.message

@@ -132,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                                                 ((sevenTimes / 3600) / 7)
                                                     .round();
                                             return Text(
-                                                '$finalSevenTimes hours',
+                                                '$finalSevenTimes videos',
                                                 style: TextStyle(
                                                   fontSize: 25,
                                                   letterSpacing: 0.8,
@@ -153,6 +153,124 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           const SizedBox(height: 80),
+                          // Center(
+                          Center(
+                            child: Column(
+                              children: [
+                                ClayContainer(
+                                    height:
+                                        MediaQuery.of(context).size.width * 1.2,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.8,
+                                    depth: 12,
+                                    spread: 12,
+                                    borderRadius: 16,
+                                    child: FlatButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ReviewList()));
+                                      },
+                                      child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 16, right: 16, top: 16),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text('Review',
+                                                  style: TextStyle(
+                                                    fontSize: 22.8,
+                                                    letterSpacing: 0.8,
+                                                    fontWeight: FontWeight.w800,
+                                                    color: fontColor,
+                                                    fontFamily: 'Raleway',
+                                                  )),
+                                              Container(
+                                                child: StreamBuilder<
+                                                    QuerySnapshot>(
+                                                  stream: FirebaseFirestore
+                                                      .instance
+                                                      .collection('users')
+                                                      .doc(authResult)
+                                                      .collection(
+                                                          'youtubeReservationList')
+                                                      .orderBy('createAt',
+                                                          descending: true)
+                                                      .snapshots(),
+                                                  builder:
+                                                      (BuildContext context,
+                                                          AsyncSnapshot<
+                                                                  QuerySnapshot>
+                                                              snapshot) {
+                                                    if (!snapshot.hasData)
+                                                      return new Text(
+                                                          "There is no expense");
+                                                    if (snapshot
+                                                            .data.docs.length ==
+                                                        0)
+                                                      return new ListTile(
+                                                          title: Text(
+                                                              'まだ記録がないようです...',
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      12)));
+                                                    return ListView.separated(
+                                                        shrinkWrap: true,
+                                                        physics:
+                                                            const NeverScrollableScrollPhysics(),
+                                                        itemCount: snapshot
+                                                            .data.docs.length,
+                                                        separatorBuilder:
+                                                            (BuildContext
+                                                                        context,
+                                                                    int
+                                                                        index) =>
+                                                                Divider(),
+                                                        itemBuilder:
+                                                            (BuildContext
+                                                                    context,
+                                                                int index) {
+                                                          final _watchList =
+                                                              snapshot.data
+                                                                  .docs[index];
+                                                          Timestamp createAt =
+                                                              _watchList.get(
+                                                                  'createAt');
+                                                          DateTime eachDate =
+                                                              createAt.toDate();
+                                                          // if (_watchList
+                                                          //         .data()
+                                                          //         .length <=
+                                                          //     index) {
+                                                          //   return Text(
+                                                          //       'this is error');
+                                                          // }
+                                                          if (index < 4) {
+                                                            return ListTile(
+                                                                title: Text(_watchList
+                                                                    .data()[
+                                                                        'videoList']
+                                                                    .length
+                                                                    .toString()),
+                                                                subtitle: Text(
+                                                                    eachDate
+                                                                        .toString()));
+                                                          } else {
+                                                            return null;
+                                                          }
+                                                        });
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          )),
+                                    )),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -164,120 +282,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-// Center(
-//   child: Column(
-//     children: [
-//       ClayContainer(
-//           height:
-//               MediaQuery.of(context).size.width * 1.2,
-//           width:
-//               MediaQuery.of(context).size.width * 0.8,
-//           depth: 12,
-//           spread: 12,
-//           borderRadius: 16,
-//           child: FlatButton(
-//             onPressed: () {
-//               Navigator.push(
-//                   context,
-//                   MaterialPageRoute(
-//                       builder: (context) =>
-// ReviewList()));
-//             },
-//             child: Padding(
-//                 padding: const EdgeInsets.only(
-//                     left: 16, right: 16, top: 16),
-//                 child: Column(
-//                   crossAxisAlignment:
-//                       CrossAxisAlignment.start,
-//                   children: [
-//                     Text('Review',
-//                         style: TextStyle(
-// fontSize: 22.8,
-// letterSpacing: 0.8,
-// fontWeight: FontWeight.w800,
-// color: fontColor,
-// fontFamily: 'Raleway',
-//                         )),
-//                     Container(
-//                       child: StreamBuilder<
-// QuerySnapshot>(
-//                         stream: FirebaseFirestore
-//   .instance
-//   .collection('users')
-//   .doc(authResult)
-//   .collection(
-//       'youtubeWatchList')
-//   .orderBy('createAt',
-//       descending: true)
-//   .snapshots(),
-//                         builder:
-//   (BuildContext context,
-//       AsyncSnapshot<
-//               QuerySnapshot>
-//           snapshot) {
-// if (!snapshot.hasData)
-//   return new Text(
-//       "There is no expense");
-// if (snapshot
-//         .data.docs.length ==
-//     0)
-//   return new ListTile(
-//       title: Text(
-//           'まだ記録がないようです...',
-//           style: TextStyle(
-//               fontSize:
-//                   12)));
-// return ListView.separated(
-//     shrinkWrap: true,
-//     physics:
-//         const NeverScrollableScrollPhysics(),
-//     itemCount: snapshot
-//         .data.docs.length,
-//     separatorBuilder:
-//         (BuildContext
-//                     context,
-//                 int
-//                     index) =>
-//             Divider(),
-//     itemBuilder:
-//         (BuildContext
-//                 context,
-//             int index) {
-//       final _watchList =
-//           snapshot.data
-//               .docs[index];
-//       Timestamp createAt =
-//           _watchList.get(
-//               'createAt');
-//       DateTime eachDate =
-//           createAt.toDate();
-//       if (_watchList
-//               .data()
-//               .length <=
-//           index) {
-//         return Text(
-//             'this is error');
-//       }
-//       if (index < 4) {
-//         return ListTile(
-//             title: Text(
-//                 _watchList.get(
-//                     'purpose')),
-//             subtitle: Text(eachDate
-//                 .toString()
-//                 .substring(
-//                     0,
-//                     19)));
-//       } else {
-//         return null;
-//       }
-//     });
-//                         },
-//                       ),
-//                     ),
-//                   ],
-//                 )),
-//           )),
-//     ],
-//   ),
-// ),

@@ -37,9 +37,6 @@ class _YoutubeAlarmState extends State<YoutubeAlarm> {
 
   final String text = "Flutter";
 
-  List<String> _items = ["A", "B", "C"];
-  String _selectedItem = "A";
-
   FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
   NotificationDetails platformChannelSpecifics;
 
@@ -197,8 +194,6 @@ class _YoutubeAlarmState extends State<YoutubeAlarm> {
                                   '6',
                                   '7',
                                   '8',
-                                  '9',
-                                  '10'
                                 ].map<DropdownMenuItem<String>>((String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
@@ -215,167 +210,6 @@ class _YoutubeAlarmState extends State<YoutubeAlarm> {
                             ],
                           ),
                         )),
-                    // Center(
-                    //   child: ClayContainer(
-                    //     height: MediaQuery.of(context).size.width * 0.4,
-                    //     width: MediaQuery.of(context).size.width * 0.8,
-                    //     depth: 12,
-                    //     spread: 12,
-                    //     borderRadius: 16,
-                    //     color: Color(0xFFF2F2F2),
-                    //     child: Padding(
-                    //         padding: const EdgeInsets.only(
-                    //             left: 16, right: 16, top: 16),
-                    //         child: Column(
-                    //             crossAxisAlignment: CrossAxisAlignment.start,
-                    //             mainAxisAlignment: MainAxisAlignment.center,
-                    //             children: [
-                    //               Text('見る時間(分)',
-                    //                   style: TextStyle(
-                    //                       fontSize: 21,
-                    //                       letterSpacing: 0.8,
-                    //                       fontWeight: FontWeight.w800,
-                    //                       color: fontColor,
-                    //                       fontFamily: 'Raleway')),
-                    //               SizedBox(height: 10),
-                    //               Row(
-                    //                 children: [
-                    //                   RaisedButton(
-                    //                     child: Text('時間設定'),
-                    //                     onPressed: () {
-                    //                       showDialog(
-                    //                           context: context,
-                    //                           builder: (BuildContext context) {
-                    //                             return StatefulBuilder(
-                    //                               builder: (context, setState) {
-                    //                                 return AlertDialog(
-                    //                                   title:
-                    //                                       Text('時間を設定してください'),
-                    //                                   content: Row(
-                    //                                     mainAxisAlignment:
-                    //                                         MainAxisAlignment
-                    //                                             .center,
-                    //                                     children: [
-                    //                                       Column(
-                    //                                         mainAxisAlignment:
-                    //                                             MainAxisAlignment
-                    //                                                 .center,
-                    //                                         children: [
-                    //                                           Padding(
-                    //                                             padding: EdgeInsets
-                    //                                                 .only(
-                    //                                                     bottom:
-                    //                                                         10),
-                    //                                             child:
-                    //                                                 Text("時間"),
-                    //                                           ),
-                    //                                           NumberPicker
-                    //                                               .integer(
-                    //                                             initialValue:
-                    //                                                 hour,
-                    //                                             minValue: 0,
-                    //                                             maxValue: 2,
-                    //                                             listViewWidth:
-                    //                                                 60.0,
-                    //                                             onChanged:
-                    //                                                 (value) {
-                    //                                               setState(() {
-                    //                                                 hour =
-                    //                                                     value;
-                    //                                               });
-                    //                                             },
-                    //                                           )
-                    //                                         ],
-                    //                                       ),
-                    //                                       Column(
-                    //                                         mainAxisAlignment:
-                    //                                             MainAxisAlignment
-                    //                                                 .center,
-                    //                                         children: [
-                    //                                           Padding(
-                    //                                             padding: EdgeInsets
-                    //                                                 .only(
-                    //                                                     bottom:
-                    //                                                         10),
-                    //                                             child:
-                    //                                                 Text("分"),
-                    //                                           ),
-                    //                                           NumberPicker
-                    //                                               .integer(
-                    //                                             initialValue:
-                    //                                                 min,
-                    //                                             minValue: 0,
-                    //                                             maxValue: 59,
-                    //                                             listViewWidth:
-                    //                                                 60.0,
-                    //                                             onChanged:
-                    //                                                 (value) {
-                    //                                               setState(() {
-                    //                                                 min = value;
-                    //                                               });
-                    //                                             },
-                    //                                           )
-                    //                                         ],
-                    //                                       ),
-                    //                                       Column(
-                    //                                         mainAxisAlignment:
-                    //                                             MainAxisAlignment
-                    //                                                 .center,
-                    //                                         children: [
-                    //                                           Padding(
-                    //                                             padding: EdgeInsets
-                    //                                                 .only(
-                    //                                                     bottom:
-                    //                                                         10),
-                    //                                             child:
-                    //                                                 Text("秒"),
-                    //                                           ),
-                    //                                           NumberPicker
-                    //                                               .integer(
-                    //                                             initialValue:
-                    //                                                 sec,
-                    //                                             minValue: 0,
-                    //                                             maxValue: 59,
-                    //                                             listViewWidth:
-                    //                                                 60.0,
-                    //                                             onChanged:
-                    //                                                 (value) {
-                    //                                               setState(() {
-                    //                                                 sec = value;
-                    //                                               });
-                    //                                             },
-                    //                                           )
-                    //                                         ],
-                    //                                       ),
-                    //                                     ],
-                    //                                   ),
-                    //                                   actions: [
-                    //                                     FlatButton(
-                    //                                       child: Text("OK"),
-                    //                                       onPressed: () =>
-                    //                                           Navigator.pop(
-                    //                                               context),
-                    //                                     ),
-                    //                                   ],
-                    //                                 );
-                    //                               },
-                    //                             );
-                    //                           });
-                    //                     },
-                    //                   ),
-                    //                   SizedBox(
-                    //                     width: 20,
-                    //                   ),
-                    //                   Text(
-                    //                     '$hour時間$min分$sec秒',
-                    //                     style: TextStyle(fontSize: 22),
-                    //                   ),
-                    //                 ],
-                    //               ),
-                    //             ])),
-                    //   ),
-                    // ),
-                    // SizedBox(height: 30),
                     Center(
                       child: ClayContainer(
                         height: MediaQuery.of(context).size.width * 0.4,
@@ -424,7 +258,11 @@ class _YoutubeAlarmState extends State<YoutubeAlarm> {
                           // onPressed: started ? start : null,
                           onPressed: () {
                             if (dropdownValue == '' || dropdownValue == '0') {
-                              return null;
+                              return showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                        content: Text('動画の本数を選択してください'),
+                                      ));
                             } else {
                               Navigator.push(
                                   context,
@@ -436,74 +274,6 @@ class _YoutubeAlarmState extends State<YoutubeAlarm> {
                             }
                           }),
                     )),
-                    // Center(
-                    //   child: Column(
-                    //     children: [
-                    //       if (timeForTimer < 10)
-                    //         Padding(
-                    //           padding: const EdgeInsets.all(5.0),
-                    //           child: Text('終了後は集計ボタンを必ず押してください！',
-                    //               style: TextStyle(fontSize: 15.6)),
-                    //         ),
-                    //       SizedBox(
-                    //         height: 10,
-                    //       ),
-                    //       ClayContainer(
-                    //           height: MediaQuery.of(context).size.width * 0.3,
-                    //           width: MediaQuery.of(context).size.width * 0.6,
-                    //           depth: 12,
-                    //           spread: 12,
-                    //           borderRadius: 16,
-                    //           color: Color(0xFFF2F2F2),
-                    //           child: Column(
-                    //             crossAxisAlignment: CrossAxisAlignment.center,
-                    //             mainAxisAlignment: MainAxisAlignment.center,
-                    //             children: [
-                    //               Center(
-                    //                   child: Text(timeToDisplay,
-                    //                       style: TextStyle(fontSize: 26.5))),
-                    //             ],
-                    //           )),
-                    //     ],
-                    //   ),
-                    // ),
-                    // SizedBox(
-                    //   height: 20,
-                    // ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     Center(
-                    //       child: SizedBox(
-                    //         width: 160,
-                    //         height: 46,
-                    //         child: RaisedButton(
-                    //           child: Text("キャンセル",
-                    //               style: TextStyle(
-                    //                   color: Colors.white, fontSize: 20)),
-                    //           color: Colors.red,
-                    //           shape: StadiumBorder(),
-                    //           onPressed: stopped ? null : stop,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     SizedBox(width: 30),
-                    //     Center(
-                    //       child: SizedBox(
-                    //         width: 160,
-                    //         height: 46,
-                    //         child: RaisedButton(
-                    //           child: Text("集計",
-                    //               style: TextStyle(
-                    //                   color: Colors.white, fontSize: 20)),
-                    //           color: Colors.black,
-                    //           shape: StadiumBorder(),
-                    //           onPressed: sw == 0 ? null : addWatchList,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                     SizedBox(
                       height: 50,
                     )
@@ -545,3 +315,234 @@ class _YoutubeAlarmState extends State<YoutubeAlarm> {
     }
   }
 }
+
+// Center(
+//   child: ClayContainer(
+//     height: MediaQuery.of(context).size.width * 0.4,
+//     width: MediaQuery.of(context).size.width * 0.8,
+//     depth: 12,
+//     spread: 12,
+//     borderRadius: 16,
+//     color: Color(0xFFF2F2F2),
+//     child: Padding(
+//         padding: const EdgeInsets.only(
+//             left: 16, right: 16, top: 16),
+//         child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               Text('見る時間(分)',
+//                   style: TextStyle(
+//                       fontSize: 21,
+//                       letterSpacing: 0.8,
+//                       fontWeight: FontWeight.w800,
+//                       color: fontColor,
+//                       fontFamily: 'Raleway')),
+//               SizedBox(height: 10),
+//               Row(
+//                 children: [
+//                   RaisedButton(
+//                     child: Text('時間設定'),
+//                     onPressed: () {
+//                       showDialog(
+//                           context: context,
+//                           builder: (BuildContext context) {
+//                             return StatefulBuilder(
+//                               builder: (context, setState) {
+//                                 return AlertDialog(
+//                                   title:
+//                                       Text('時間を設定してください'),
+//                                   content: Row(
+//                                     mainAxisAlignment:
+//                                         MainAxisAlignment
+//                                             .center,
+//                                     children: [
+//                                       Column(
+//                                         mainAxisAlignment:
+//                                             MainAxisAlignment
+//                                                 .center,
+//                                         children: [
+//                                           Padding(
+//                                             padding: EdgeInsets
+//                                                 .only(
+//                                                     bottom:
+//                                                         10),
+//                                             child:
+//                                                 Text("時間"),
+//                                           ),
+//                                           NumberPicker
+//                                               .integer(
+//                                             initialValue:
+//                                                 hour,
+//                                             minValue: 0,
+//                                             maxValue: 2,
+//                                             listViewWidth:
+//                                                 60.0,
+//                                             onChanged:
+//                                                 (value) {
+//                                               setState(() {
+//                                                 hour =
+//                                                     value;
+//                                               });
+//                                             },
+//                                           )
+//                                         ],
+//                                       ),
+//                                       Column(
+//                                         mainAxisAlignment:
+//                                             MainAxisAlignment
+//                                                 .center,
+//                                         children: [
+//                                           Padding(
+//                                             padding: EdgeInsets
+//                                                 .only(
+//                                                     bottom:
+//                                                         10),
+//                                             child:
+//                                                 Text("分"),
+//                                           ),
+//                                           NumberPicker
+//                                               .integer(
+//                                             initialValue:
+//                                                 min,
+//                                             minValue: 0,
+//                                             maxValue: 59,
+//                                             listViewWidth:
+//                                                 60.0,
+//                                             onChanged:
+//                                                 (value) {
+//                                               setState(() {
+//                                                 min = value;
+//                                               });
+//                                             },
+//                                           )
+//                                         ],
+//                                       ),
+//                                       Column(
+//                                         mainAxisAlignment:
+//                                             MainAxisAlignment
+//                                                 .center,
+//                                         children: [
+//                                           Padding(
+//                                             padding: EdgeInsets
+//                                                 .only(
+//                                                     bottom:
+//                                                         10),
+//                                             child:
+//                                                 Text("秒"),
+//                                           ),
+//                                           NumberPicker
+//                                               .integer(
+//                                             initialValue:
+//                                                 sec,
+//                                             minValue: 0,
+//                                             maxValue: 59,
+//                                             listViewWidth:
+//                                                 60.0,
+//                                             onChanged:
+//                                                 (value) {
+//                                               setState(() {
+//                                                 sec = value;
+//                                               });
+//                                             },
+//                                           )
+//                                         ],
+//                                       ),
+//                                     ],
+//                                   ),
+//                                   actions: [
+//                                     FlatButton(
+//                                       child: Text("OK"),
+//                                       onPressed: () =>
+//                                           Navigator.pop(
+//                                               context),
+//                                     ),
+//                                   ],
+//                                 );
+//                               },
+//                             );
+//                           });
+//                     },
+//                   ),
+//                   SizedBox(
+//                     width: 20,
+//                   ),
+//                   Text(
+//                     '$hour時間$min分$sec秒',
+//                     style: TextStyle(fontSize: 22),
+//                   ),
+//                 ],
+//               ),
+//             ])),
+//   ),
+// ),
+// SizedBox(height: 30),
+
+// Center(
+//   child: Column(
+//     children: [
+//       if (timeForTimer < 10)
+//         Padding(
+//           padding: const EdgeInsets.all(5.0),
+//           child: Text('終了後は集計ボタンを必ず押してください！',
+//               style: TextStyle(fontSize: 15.6)),
+//         ),
+//       SizedBox(
+//         height: 10,
+//       ),
+//       ClayContainer(
+//           height: MediaQuery.of(context).size.width * 0.3,
+//           width: MediaQuery.of(context).size.width * 0.6,
+//           depth: 12,
+//           spread: 12,
+//           borderRadius: 16,
+//           color: Color(0xFFF2F2F2),
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               Center(
+//                   child: Text(timeToDisplay,
+//                       style: TextStyle(fontSize: 26.5))),
+//             ],
+//           )),
+//     ],
+//   ),
+// ),
+// SizedBox(
+//   height: 20,
+// ),
+// Row(
+//   mainAxisAlignment: MainAxisAlignment.center,
+//   children: [
+//     Center(
+//       child: SizedBox(
+//         width: 160,
+//         height: 46,
+//         child: RaisedButton(
+//           child: Text("キャンセル",
+//               style: TextStyle(
+//                   color: Colors.white, fontSize: 20)),
+//           color: Colors.red,
+//           shape: StadiumBorder(),
+//           onPressed: stopped ? null : stop,
+//         ),
+//       ),
+//     ),
+//     SizedBox(width: 30),
+//     Center(
+//       child: SizedBox(
+//         width: 160,
+//         height: 46,
+//         child: RaisedButton(
+//           child: Text("集計",
+//               style: TextStyle(
+//                   color: Colors.white, fontSize: 20)),
+//           color: Colors.black,
+//           shape: StadiumBorder(),
+//           onPressed: sw == 0 ? null : addWatchList,
+//         ),
+//       ),
+//     ),
+//   ],
+// ),

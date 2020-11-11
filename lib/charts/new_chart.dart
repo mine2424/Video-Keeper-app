@@ -45,8 +45,9 @@ class _LineChartSample2State extends State<LineChartSample2> {
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (!snapshot.hasData) return const Text("少々お待ち下さい");
-                  if (snapshot.data.docs.length == 0)
-                    return const ListTile(title: Text('まだ記録がないようです...'));
+                  if (snapshot.data.docs.length < 6)
+                    return const ListTile(
+                        title: Center(child: Text('まだ記録がないか、少なすぎるのでグラフを表示できません...')));
                   // final snapDate =
                   // snapshot.data.docs[1].data()['videoList'].length;
                   // var timeList = [];
@@ -149,9 +150,6 @@ class _LineChartSample2State extends State<LineChartSample2> {
 
                               case 8:
                                 return '8';
-
-                              case 10:
-                                return '10';
                             }
                             return '';
                           },
@@ -166,7 +164,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
                       minX: 0,
                       maxX: 12,
                       minY: 0,
-                      maxY: 10,
+                      maxY: 8,
                       lineBarsData: [
                         LineChartBarData(
                           spots: [
@@ -213,9 +211,9 @@ class _LineChartSample2State extends State<LineChartSample2> {
                                         .length))
                                     .toDouble()),
                           ],
-                          isCurved: true,
+                          isCurved: false,
                           colors: gradientColors,
-                          barWidth: 5,
+                          barWidth: 4,
                           isStrokeCapRound: true,
                           dotData: FlDotData(
                             show: true,
