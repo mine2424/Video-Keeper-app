@@ -6,6 +6,8 @@ import 'package:flutter_new_mytube_app/home/home.dart';
 import 'package:flutter_new_mytube_app/tabBarControll/tabBarControll.dart';
 
 class ContactForm extends StatefulWidget {
+  String idea;
+  ContactForm({Key key, this.idea}) : super(key: key);
   @override
   _ContactFormState createState() => _ContactFormState();
 }
@@ -17,7 +19,8 @@ class _ContactFormState extends State<ContactForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('お問い合わせフォーム'),
+        title:
+            (widget.idea != '意見箱') ? Text('お問い合わせフォーム') : Text('アプリのご意見を下さい！'),
         backgroundColor: Color(0xFF2D89AD),
       ),
       body: SingleChildScrollView(
@@ -46,7 +49,9 @@ class _ContactFormState extends State<ContactForm> {
                         onSaved: (input) => _callMail = input,
                       ),
                       SizedBox(height: 20),
-                      Text('ご用件', style: TextStyle(fontSize: 20)),
+                      (widget.idea != '意見箱')
+                          ? Text('ご用件', style: TextStyle(fontSize: 20))
+                          : Text('ご意見', style: TextStyle(fontSize: 20)),
                       TextFormField(
                         maxLength: 100,
                         maxLines: 1,
@@ -108,9 +113,12 @@ class _ContactFormState extends State<ContactForm> {
       //login and describe user details to firebase
       try {
         await Firebase.initializeApp();
-        FirebaseFirestore.instance
-            .collection('usersContactForm')
-            .add({'createAt': Timestamp.now()});
+        FirebaseFirestore.instance.collection('usersContactForm').add({
+          'createAt': Timestamp.now(),
+          'context': _callContext,
+          'email': _callMail,
+          'name': _callName
+        });
         // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
       } catch (error) {
         print(error);

@@ -57,10 +57,30 @@ class _SettingState extends State<Setting> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ContactForm()));
+                              builder: (context) => ContactForm(idea:'none')));
                     },
                     child: Text(
                       'お問い合わせフォーム',
+                      style: TextStyle(fontSize: 21),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 40),
+                ClayContainer(
+                  height: MediaQuery.of(context).size.width * 0.23,
+                  width: MediaQuery.of(context).size.width * 0.65,
+                  depth: 12,
+                  spread: 12,
+                  borderRadius: 16,
+                  child: FlatButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ContactForm(idea:'意見箱')));
+                    },
+                    child: Text(
+                      '意見箱',
                       style: TextStyle(fontSize: 21),
                     ),
                   ),
